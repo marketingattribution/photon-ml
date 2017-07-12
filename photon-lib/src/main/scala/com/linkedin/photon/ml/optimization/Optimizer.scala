@@ -66,7 +66,7 @@ abstract class Optimizer[-Function <: ObjectiveFunction](
    * @param state The initial state
    */
   private def setAbsTolerances(state: OptimizerState) = {
-    lossAbsTolerance = state.loss * relTolerance
+    lossAbsTolerance = state.value * relTolerance
     gradientAbsTolerance = norm(state.gradient, 2) * relTolerance
   }
 
@@ -135,7 +135,7 @@ abstract class Optimizer[-Function <: ObjectiveFunction](
       Some(MaxIterations)
     } else if (currentState.get.iter == previousState.get.iter) {
       Some(ObjectiveNotImproving)
-    } else if (abs(currentState.get.loss - previousState.get.loss) <= lossAbsTolerance) {
+    } else if (abs(currentState.get.value - previousState.get.value) <= lossAbsTolerance) {
       Some(FunctionValuesConverged)
     } else if (norm(currentState.get.gradient, 2) <= gradientAbsTolerance) {
       Some(GradientConverged)
@@ -186,7 +186,7 @@ abstract class Optimizer[-Function <: ObjectiveFunction](
 
     statesTracker.foreach(_.convergenceReason = getConvergenceReason)
     val currState = getCurrentState.get
-    (currState.coefficients, currState.loss)
+    (currState.coefficients, currState.value)
   }
 
   /**

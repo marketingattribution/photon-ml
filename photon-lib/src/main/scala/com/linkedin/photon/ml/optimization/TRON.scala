@@ -151,7 +151,7 @@ class TRON(
 
     val prevCoefficients = currState.coefficients
     val convertedPrevCoefficients = objectiveFunction.convertFromVector(prevCoefficients)
-    val prevFunctionValue = currState.loss
+    val prevFunctionValue = currState.value
     val prevFunctionGradient = currState.gradient
     val prevIter = currState.iter
     val isFirstIteration = currState.iter == 0

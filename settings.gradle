@@ -16,8 +16,8 @@ apply plugin: 'scala-cross-build'
 
 scalaCrossBuild {
 
-  defaultScalaVersion '2.10.4'
-  targetScalaVersions '2.10.4'
+  defaultScalaVersion '2.11.8'
+  targetScalaVersions '2.11.8'
   buildDefaultOnly false
 
   projectsToCrossBuild(
